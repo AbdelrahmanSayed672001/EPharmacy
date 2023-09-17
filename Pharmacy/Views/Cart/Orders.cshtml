@@ -1,0 +1,79 @@
+﻿<section id="services" class="services">
+    <!--  Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Orders</h2>
+    </div><!-- End Section Title -->
+
+    <table class="table" style="margin-top:25px;">
+        <thead class="table-dark table-danger">
+            <tr>
+                <th scope="col">User name</th>
+                <th scope="col">Medicines name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Address</th>
+                <th scope="col">Total price</th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (ViewBag.Message is null)
+                {
+                    if (ViewBag.OutputUser is not null)
+                    {
+                        if (ViewBag.OutputSize == 1)
+                        {
+                            <tr>
+                                <td>@ViewBag.OutputUser</td>
+                                <td>@ViewBag.OutputMedicine</td>
+                                <td>@ViewBag.OutputPhone</td>
+                                <td>@ViewBag.OutputAddress</td>
+                                <td>@ViewBag.OutputQuantity</td>
+                                <td>@ViewBag.OutputPrice</td>
+
+                            </tr>
+                        }
+                        else
+                        {
+                            var cnt = 0;
+                            while (cnt < ViewBag.OutputSize)
+                            {
+                                <tr>
+                                    @{
+                                        <td>@ViewBag.OutputUser[cnt]</td>
+                                        <td>@ViewBag.OutputMedicine[cnt]</td>
+                                        <td>@ViewBag.OutputQuantity[cnt]</td>
+                                        <td>@ViewBag.OutputPhone[cnt]</td>
+                                        <td>@ViewBag.OutputAddress[cnt]</td>
+                                        <td>@ViewBag.OutputPrice[cnt]</td>
+
+                                    }
+                                </tr>
+                                cnt++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>Not Found any medicines yet</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>@ViewBag.Messgae</td>
+                    </tr>
+
+                }
+
+            }
+
+        </tbody>
+    </table>
+</section>
+
+
+

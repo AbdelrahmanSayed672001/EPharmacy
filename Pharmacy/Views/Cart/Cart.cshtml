@@ -1,0 +1,90 @@
+﻿<section id="services" class="services">
+    <!--  Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Orders</h2>
+    </div><!-- End Section Title -->
+
+    <table class="table" style="margin-top:25px;">
+        <thead class="table-dark table-danger">
+            <tr>
+
+                <th scope="col">Medicines name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total price</th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (ViewBag.Message is null)
+                {
+                    if (ViewBag.OutputMedicine is not null)
+                    {
+                        if (ViewBag.OutputSize == 1)
+                        {
+                            <tr>
+                                <td>@ViewBag.OutputMedicine</td>
+
+                                <td>@ViewBag.OutputQuantity</td>
+                                <td>@ViewBag.OutputPrice</td>
+
+                            </tr>
+                        }
+                        else
+                        {
+                            var cnt = 0;
+                            while (cnt < ViewBag.OutputSize)
+                            {
+                                <tr>
+                                    @{
+                                        <td>@ViewBag.OutputMedicine[cnt]</td>
+                                        <td>@ViewBag.OutputQuantity[cnt]</td>
+
+                                        <td>@ViewBag.OutputPrice[cnt]</td>
+
+                                    }
+                                </tr>
+                                cnt++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>Not Found any medicines in cart yet</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>@ViewBag.Messgae</td>
+                    </tr>
+
+                }
+
+            }
+
+        </tbody>
+    </table>
+
+</section>
+<div>
+    @{
+        if (ViewBag.TotalPrice == null)
+        {
+            <h3>Total Price is 0</h3>
+        }
+        else
+        {
+            <h3>Total Price is @ViewBag.TotalPrice</h3>
+            <div class="alert-info">
+                <p>Your order will prepare after few minutes</p>
+            </div>
+        }
+    }
+
+</div>
+
+
+

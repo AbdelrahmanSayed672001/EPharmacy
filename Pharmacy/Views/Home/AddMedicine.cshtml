@@ -1,0 +1,120 @@
+﻿@using Pharmacy.ViewModel
+@model NewMedicineViewModel
+
+<!-- Contact Section - Home Page -->
+<section id="contact" class="contact">
+
+    <!--  Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Add new medicine</h2>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4" style="justify-content:space-around">
+
+            <div class="col-lg-6">
+                <form method="post" asp-action="Add"   >
+                    <div class="row gy-4">
+
+                        <div class="col-md-6">
+                            <input type="text" asp-for="name" class="form-control" placeholder="Medicine name" required="">
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <select class="form-select" asp-for="medicineTypeId" aria-label="Default select example">
+                                <option selected>Select the type</option>
+                                @{
+                                    var cnt = 0;
+                                    while (cnt < ViewBag.MedicineTypeSize)
+                                    {
+                                                <option value="@ViewBag.MedicineTypesID[cnt]">@ViewBag.MedicineTypesName[cnt]</option>
+                                        cnt++;
+                                    }
+
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="text" asp-for="quantity" class="form-control" placeholder="Quantity" required="">
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="text" asp-for="price" class="form-control" placeholder="Price" required="">
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="col-md-12 text-center" style="padding-top: 26px;">
+                            
+                            <div class="sent-message"> @ViewBag.OutputMSG</div>
+                            <button type="submit" class="btn btn-success" style="width: 200px;height: 43px;">Add a medicine</button>
+                        </div>
+                </form>
+
+            </div><!-- End Contact Form -->
+
+        </div>
+
+    </div>
+    @*@{
+        if (ViewBag.OutputMSG is not null)
+        {
+            <div class="alert-info">@ViewBag.OutputMSG</div>
+        }
+    }*@
+</section><!-- End Contact Section -->
+
+@*<div class="container">
+
+    <form asp-action="Add" method="post">
+        <div class="form-row">
+            <div class="input-data">
+                <div class="underline"></div>
+                <label for="">Name</label>
+                <input asp-for="name" type="text" required>
+
+            </div>
+            <div class="input-data">
+                <div class="underline"></div>
+                <label for="">Qua</label>
+                <input asp-for="quantity" type="text" required>
+
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-data">
+                <div class="underline"></div>
+                <label for="">Price</label>
+                <input asp-for="price" type="text" required>
+
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="input-data textarea">
+                <select class="form-select" asp-for="medicineTypeId" aria-label="Default select example">
+                    <option selected>Select the type</option>
+                    @{
+                        var cnt = 0;
+                        while (cnt < ViewBag.MedicineTypeSize)
+                        {
+                            <option value="@ViewBag.MedicineTypesID[cnt]">@ViewBag.MedicineTypesName[cnt]</option>
+                            cnt++;
+                        }
+
+                    }
+                </select>
+                <div class="form-row submit-btn">
+                    <div class="input-data">
+                        <div class="inner"></div>
+                        <input type="submit" value="submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+*@

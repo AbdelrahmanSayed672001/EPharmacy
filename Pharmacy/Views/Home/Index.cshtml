@@ -1,0 +1,199 @@
+﻿@using Pharmacy.ViewModel
+@model GetName
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/assets/img/favicon.png" rel="icon">
+    <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body class="blog-page" data-bs-spy="scroll" data-bs-target="#navmenu">
+    <main id="main">
+        <!-- Blog Page Title & Breadcrumbs -->
+        <div class="page-title">
+            <div class="heading">
+                <div class="container">
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <h1>Medicines</h1>
+
+
+                            <div class="sidebar-item search-form">
+                                <form asp-action="Index" method="get" style="margin-top: 1rem!important; ">
+                                    <input type="text" asp-for="Name" style="border-radius: 5px 0px 0px 5px;height: 33px;width: 382px;">
+                                    <button class="S" type="submit" style=""><i class="bi bi-search"></i></button>
+                                </form>
+                            </div>
+
+
+                            <table class="table" style="margin-top:25px;">
+                                <thead class="table-dark table-danger">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">price</th>
+                                        @{
+                                            if (User.IsInRole("User"))/*UserAdmin*/
+                                            {
+                                                <th scope="col"><i class="bi bi-cart"></i></th>
+                                            }
+                                            else
+                                            {
+                                                <th scope="col"></th>
+
+                                            }
+                                        }
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        if (ViewBag.Message is null)
+                                        {
+                                            if (ViewBag.OutputName is not null)
+                                            {
+                                                if (ViewBag.OutputSize == 1)
+                                                {
+                                                    <tr>
+                                                        <td>@ViewBag.OutputName</td>
+                                                        <td>@ViewBag.OutputQuantity</td>
+                                                        <td>@ViewBag.OutputPrice</td>
+                                                        @{
+                                                            if (User.IsInRole("User"))/*UserAdmin*/
+                                                            {
+                                                                <td>
+                                                                    @*<button type="submit" class="btn btn-success">Add to cart</button>*@
+                                                                    <a href="/cart/addToCart?name=@ViewBag.OutputName" class="btn btn-success">Add to cart</a>
+
+                                                                </td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>
+                                                                    <a href="/Home/Delete/@ViewBag.OutputID" class="btn btn-danger">Delete</a>
+                                                                </td>
+
+                                                            }
+                                                        }
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    var cnt = 0;
+                                                    while (cnt < ViewBag.OutputSize)
+                                                    {
+                                                        <tr>
+                                                            @{
+                                                                <td>@ViewBag.OutputName[cnt]</td>
+                                                                <td>@ViewBag.OutputQuantity[cnt]</td>
+                                                                <td>@ViewBag.OutputPrice[cnt]</td>
+                                                                if (User.IsInRole("User"))/*UserAdmin*/
+                                                                {
+                                                                    <td>
+                                                                        @*<button type="submit" class="btn btn-success">Add to cart</button>*@
+                                                                        <a href="/cart/addToCart?name=@ViewBag.OutputName[cnt]" class="btn btn-success">Add to cart</a>
+
+                                                                    </td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td>
+                                                                        <a href="/home/delete?name=@ViewBag.OutputName[cnt]" class="btn btn-danger">Delete</a>
+                                                                    </td>
+                                                                }
+
+                                                            }
+                                                        </tr>
+                                                        cnt++;
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>Not Found any medicines yet</td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@ViewBag.Messgae</td>
+                                            </tr>
+
+                                        }
+
+                                    }
+
+                                </tbody>
+                            </table>
+                            <!-- start Pagination -->
+                            <section id="blog" class="blog">
+
+                                <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+
+                                    <div class="pagination d-flex justify-content-center">
+                                        <ul>
+                                            @{
+                                                for (var i = 1; i <= ViewBag.Size; i++)
+                                                {
+                                                    <li class="active"><a href="/Home/Index?Page=@i">@i</a></li>
+                                                }
+                                            }
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- End pagination -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- End Page Title -->
+
+
+    </main>
+
+</body>
+</html>
+
+
+@{
+    if (ViewBag.Delete is not null)
+    {
+        <script>
+            alert("@ViewBag.Delete");
+        </script>
+    }
+}

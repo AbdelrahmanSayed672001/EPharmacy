@@ -1,0 +1,62 @@
+﻿@page
+@model LoginModel
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/LoginAssets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/LoginAssets/css/style.css">
+</head>
+<body>
+    <!-- Sign up form -->
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content" style="display:flex;flex-direction:row-reverse;">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign in</h2>
+                    <form method="POST" class="register-form" id="register-form" asp-route-returnUrl="@Model.ReturnUrl">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                       
+                        <div class="form-group">
+                            <label asp-for="Input.Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input asp-for="Input.Email" placeholder="Email" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Input.Password"><i class="zmdi zmdi-lock"></i></label>
+                            <input asp-for="Input.Password" placeholder="Password" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                        </div>
+                        
+                       
+                        <div class="form-group form-button">
+                            <input type="submit" class="btn btn-outline-danger" style="margin-top:75px;" value="Login" />
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure style="margin-bottom:0px;"><img src="~/LoginAssets/images/Logo.jpeg" alt="sing up image" style="margin-top: -42px"></figure>
+                    <a href="/Identity/Account/Register" class="signup-image-link">Create a new account</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+    </body>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+    </html>
+    
+    

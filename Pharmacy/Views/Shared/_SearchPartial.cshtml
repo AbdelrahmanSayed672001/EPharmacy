@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Pharmacy.ViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model MedicinesViewModel
+<div class="sidebar-item search-form">
+    <form asp-action="Index" style="margin-top: 1rem!important; ">
+        <input type="text" asp-for="name" style="border-radius: 5px 0px 0px 5px;height: 33px;width: 382px;">
+        <button class="S" type="submit" style=""><i class="bi bi-search"></i></button>
+    </form>
+</div><!-- End sidebar search form-->
